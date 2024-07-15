@@ -710,7 +710,7 @@ def get_citizens_sue_citizens(query: str, info: str) -> str:
                     "type": "object",
                     "properties": {
                         "data": {
-                            "type": "list[str]",
+                            "type": "dict[str, str]",
                             "description": '''data, 属性名称(列表中的字段)包含，原告，原告性别，\
 原告生日，原告民族，原告工作单位，原告地址，原告联系方式，原告委托诉讼代理人，原告委托诉讼代理人联系方式，\
 被告，被告性别，被告生日，被告民族，被告工作单位，被告地址，被告联系方式，被告委托诉讼代理人，被告委托诉讼代理人联系方式，\
@@ -765,7 +765,7 @@ def get_company_sue_citizens(query: str, info: str) -> str:
                     "type": "object",
                     "properties": {
                         "data": {
-                            "type": "list[str]",
+                            "type": "dict[str, str]",
                             "description": '''data, 属性名称(列表中的字段)包含，原告，原告地址，\
 原告法定代表人，原告联系方式，原告委托诉讼代理人，原告委托诉讼代理人联系方式，被告，被告性别，被告生日，被告民族，\
 被告工作单位，被告地址，被告联系方式，被告委托诉讼代理人，被告委托诉讼代理人联系方式，诉讼请求，事实和理由，证据，法院名称，起诉日期。\
@@ -819,7 +819,7 @@ def get_citizens_sue_company(query: str, info: str) -> str:
                     "type": "object",
                     "properties": {
                         "data": {
-                            "type": "list[str]",
+                            "type": "dict[str, str]",
                             "description": '''data, 属性名称(列表中的字段)包含，原告，原告性别，原告生日，\
 原告民族，原告工作单位，原告地址，原告联系方式，原告委托诉讼代理人，原告委托诉讼代理人联系方式，被告，被告地址，被告法定代表人，\
 被告联系方式，被告委托诉讼代理人，被告委托诉讼代理人联系方式，诉讼请求，事实和理由，证据，法院名称，起诉日期。\
@@ -873,7 +873,7 @@ def get_company_sue_company(query: str, info: str) -> str:
                     "type": "object",
                     "properties": {
                         "data": {
-                            "type": "list[str]",
+                            "type": "dict[str, str]",
                             "description": '''data, 属性名称(列表中的字段)包含，原告，原告地址，原告法定代表人，\
 原告联系方式，原告委托诉讼代理人，原告委托诉讼代理人联系方式，被告，被告地址，被告法定代表人，被告联系方式，被告委托诉讼代理人，\
 被告委托诉讼代理人联系方式，诉讼请求，事实和理由，证据，法院名称，起诉日期。\
