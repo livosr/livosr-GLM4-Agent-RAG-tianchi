@@ -2,7 +2,7 @@ from zhipuai import ZhipuAI
 import requests
 import json
 
-api_key = "b656729dfd67155bbf75c199b6a6bc11.T31fF8JEYngGjPog"
+api_key = "8f5594ef782d24752c0e875d8da33592.ElGxsEuPuzU9ra6C"
 client = ZhipuAI(api_key=api_key) # 请填写您自己的APIKey
 
 # 根据子问题和info，返回筛选出来的函数入参和需要调用的服务函数名称
