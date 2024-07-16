@@ -1,6 +1,6 @@
 from zhipuai import ZhipuAI
 import json
-api_key = "8f5594ef782d24752c0e875d8da33592.ElGxsEuPuzU9ra6C"  # 肖
+api_key = "8f5594ef782d24752c0e875d8da33592.ElGxsEuPuzU9ra6C"  # 肖的token
 client = ZhipuAI(api_key=api_key) # 请填写您自己的APIKey
 
 def get_answer(info_dict, query):
