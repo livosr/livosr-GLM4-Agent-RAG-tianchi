@@ -359,7 +359,7 @@ def get_legal_document_list(query: str, info: str) -> str:
         根据关联公司查询所有裁判文书相关信息list
         入参：query_conds (dict[str, str]): 查询条件的字典,键为'关联公司'，\
         need_fields (list[str]): 需要返回的字段列表。need_fields传入空列表，则表示返回所有字段，否则返回填入的字段
-        出参：list[dict[str, str]]: 所有裁判文书相关信息list。
+        出参：int, list[dict[str, str]]: 该公司涉案总次数、所有裁判文书相关信息list。
 
                         ''',
                 "parameters": {
@@ -372,7 +372,7 @@ def get_legal_document_list(query: str, info: str) -> str:
                         "need_fields": {
                             "type": "list[str]",
                             "description": '''need_fields, 属性名称(列表中的字段)包含，关联公司，标题，案号，文书类型，\
-原告，被告，原告律师事务所，被告律师事务所，案由，涉案金额，判决结果，日期，文件名。\
+原告，被告，原告律师事务所，被告律师事务所，案由，涉案金额，判决结果，日期，文件名，起诉日期，涉案次数。\
 你需要找出最符合query的一个或几个需要查询的属性,属性必须是上述特征，一个字不能变。
 '''}
 
