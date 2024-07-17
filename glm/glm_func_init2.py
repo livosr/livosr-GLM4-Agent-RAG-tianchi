@@ -299,56 +299,114 @@ def get_xzgxf_info_list(query: str, info: str) -> str:
     return response_arguments, func_name
 
 
+# def get_sum(query: str, info: str) -> str:
+#     # 17
+#     tools = [
+#         # get_sum
+#         {
+#             "type": "function",
+#             "function": {
+#                 "name": "get_sum",
+#                 "description": '''
+#             求和函数，可以对传入的int、float、str数组进行求和，str数组可以转换字符串里包含的单位信息，如"1万"，只支持“千”，“万”，亿”
+#             入参:nums: list[int] or list[float] or list[str]: 需要求和的列表，里面的元素有三种类型，int,float和str
+#             返回:int or float: 求和结果
+#                         ''',
+#                 "parameters": {
+#                     "type": "object",
+#                     "properties": {
+#                         "nums": {
+#                             "type": "list[int] or list[float] or list[str]",
+#                             "description": "需要求和的列表，里面的元素有三种类型，int,float和str，eg[1万, 1亿, 2千]",
+#                         },
+#                     },
+#                     "required": ["nums"],
+#                 },
+#             }
+#         },
+#     ]
+#
+#     messages = [
+#         {
+#             "role": "system",
+#             "content": '''
+#                     你是一个优秀的问题分类与信息提取机器人，我需要你根据输入的query以及info(info可能有也可能没有),给出函数输入参数,你的返回值需要包含需要使用的函数的全称:\n
+#         '''
+#         },
+#         {
+#             "role": "user",
+#             "content": " query:{}\ninfo{}\n".format(query, info)
+#         }
+#     ]
+#
+#     response = client.chat.completions.create(
+#         model="glm-4",  # 填写需要调用的模型名称
+#         messages=messages,
+#         tools=tools,
+#         tool_choice="auto",
+#     )
+#     func_name = response.choices[0].message.tool_calls[0].function.name
+#     response_arguments = json.loads(response.choices[0].message.tool_calls[0].function.arguments)
+#     print(response_arguments)
+#     return response_arguments, func_name
+
+
 def get_sum(query: str, info: str) -> str:
     # 17
-    tools = [
-        # get_sum
-        {
-            "type": "function",
-            "function": {
-                "name": "get_sum",
-                "description": '''
-            求和函数，可以对传入的int、float、str数组进行求和，str数组可以转换字符串里包含的单位信息，如"1万"，只支持“千”，“万”，亿”
-            入参:nums: list[int] or list[float] or list[str]: 需要求和的列表，里面的元素有三种类型，int,float和str    
-            返回:int or float: 求和结果
-                        ''',
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "nums": {
-                            "type": "list[int] or list[float] or list[str]",
-                            "description": "需要求和的列表，里面的元素有三种类型，int,float和str，eg[1万, 1亿, 2千]",
-                        },
-                    },
-                    "required": ["nums"],
-                },
-            }
-        },
-    ]
-
-    messages = [
-        {
-            "role": "system",
-            "content": '''
-                    你是一个优秀的问题分类与信息提取机器人，我需要你根据输入的query以及info(info可能有也可能没有),给出函数输入参数,你的返回值需要包含需要使用的函数的全称:\n
-        '''
-        },
-        {
-            "role": "user",
-            "content": " query:{}\ninfo{}\n".format(query, info)
-        }
-    ]
-
-    response = client.chat.completions.create(
-        model="glm-4",  # 填写需要调用的模型名称
-        messages=messages,
-        tools=tools,
-        tool_choice="auto",
-    )
-    func_name = response.choices[0].message.tool_calls[0].function.name
-    response_arguments = json.loads(response.choices[0].message.tool_calls[0].function.arguments)
+    # tools = [
+    #     # get_sum
+    #     {
+    #         "type": "function",
+    #         "function": {
+    #             "name": "get_sum",
+    #             "description": '''
+    #         求和函数，可以对传入的int、float、str数组进行求和，str数组可以转换字符串里包含的单位信息，如"1万"，只支持“千”，“万”，亿”
+    #         入参:nums: list[int] or list[float] or list[str]: 需要求和的列表，里面的元素有三种类型，int,float和str
+    #         返回:int or float: 求和结果
+    #                     ''',
+    #             "parameters": {
+    #                 "type": "object",
+    #                 "properties": {
+    #                     "nums": {
+    #                         "type": "list[int] or list[float] or list[str]",
+    #                         "description": "需要求和的列表，里面的元素有三种类型，int,float和str，eg[1万, 1亿, 2千]",
+    #                     },
+    #                 },
+    #                 "required": ["nums"],
+    #             },
+    #         }
+    #     },
+    # ]
+    #
+    # messages = [
+    #     {
+    #         "role": "system",
+    #         "content": '''
+    #                 你是一个优秀的问题分类与信息提取机器人，我需要你根据输入的query以及info(info可能有也可能没有),给出函数输入参数,你的返回值需要包含需要使用的函数的全称:\n
+    #     '''
+    #     },
+    #     {
+    #         "role": "user",
+    #         "content": " query:{}\ninfo{}\n".format(query, info)
+    #     }
+    # ]
+    #
+    # response = client.chat.completions.create(
+    #     model="glm-4",  # 填写需要调用的模型名称
+    #     messages=messages,
+    #     tools=tools,
+    #     tool_choice="auto",
+    # )
+    # func_name = response.choices[0].message.tool_calls[0].function.name
+    # response_arguments = json.loads(response.choices[0].message.tool_calls[0].function.arguments)
+    # 只针对涉案金额进行加和
+    func_name = 'get_sum'
+    response_arguments = []
+    for argument in info:
+        response_arguments.append(argument['涉案金额'])
     print(response_arguments)
     return response_arguments, func_name
+
 
 
 def rank(query: str, info: str) -> str:
