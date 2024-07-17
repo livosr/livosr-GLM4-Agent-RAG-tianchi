@@ -3,6 +3,7 @@ import sys
 sys.path.append(r'C:/Users/Administrator/Desktop/yuyuelin_b')
 import yuyuelin_b.glm.glm_query as glm
 import yuyuelin_b.glm.glm_func_init as glm_func_init
+import yuyuelin_b.glm.glm_func_init2 as glm_func_init2
 import yuyuelin_b.api.get_api_response as get_api_response
 
 
@@ -78,21 +79,21 @@ def get_function_init(function_name, query, info):
     elif function_name == "get_address_info":
         return glm_func_init.get_address_info(query=query, info=info)
     elif function_name == "get_address_code":
-        return glm_func_init.get_address_code(query=query, info=info)
+        return glm_func_init2.get_address_code(query=query, info=info)
     elif function_name == "get_temp_info":
-        return glm_func_init.get_temp_info(query=query, info=info)
+        return glm_func_init2.get_temp_info(query=query, info=info)
     elif function_name == "get_legal_abstract":
-        return glm_func_init.get_legal_abstract(query=query, info=info)
+        return glm_func_init2.get_legal_abstract(query=query, info=info)
     elif function_name == "get_xzgxf_info":
-        return glm_func_init.get_xzgxf_info(query=query, info=info)
+        return glm_func_init2.get_xzgxf_info(query=query, info=info)
     elif function_name == "get_xzgxf_info_list":
-        return glm_func_init.get_xzgxf_info_list(query=query, info=info)
+        return glm_func_init2.get_xzgxf_info_list(query=query, info=info)
     elif function_name == "get_sum":
-        return glm_func_init.get_sum(query=query, info=info)
+        return glm_func_init2.get_sum(query=query, info=info)
     elif function_name == "rank":
-        return glm_func_init.rank(query=query, info=info)
+        return glm_func_init2.rank(query=query, info=info)
     elif function_name == "save_dict_list_to_word":
-        return glm_func_init.save_dict_list_to_word(query=query, info=info)
+        return glm_func_init2.save_dict_list_to_word(query=query, info=info)
     elif function_name == "get_citizens_sue_citizens":
         return glm_func_init.get_citizens_sue_citizens(query=query, info=info)
     elif function_name == "get_company_sue_citizens":
@@ -102,7 +103,7 @@ def get_function_init(function_name, query, info):
     elif function_name == "get_company_sue_company":
         return glm_func_init.get_company_sue_company(query=query, info=info)
     elif function_name == "filter_":
-        return glm_func_init.filter_(query=query, info=info)
+        return glm_func_init2.filter_(query=query, info=info)
     else:
         raise EOFError("Function not found")
 
