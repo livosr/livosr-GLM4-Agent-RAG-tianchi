@@ -477,7 +477,7 @@ def filter_(query: str, info: str) -> str:
             通过传入待筛选属性名称，判别类别和判断条件，进行多轮筛选，
             对于每种待筛选属性，根据指定的判别类别和判断条件，筛选出符合要求的input_info中的数据项
             例如，给定妙可蓝多公司的涉案信息列表，筛选出起诉日期在2020年，涉案金额大于100万小于1000万的案件
-            那么这个例子中，待筛选属性1就是起诉日期，判别类别为等于，判断条件为2020，待筛选属性2是涉案金额，判别类别为区间，判断条件为[100,1000]
+            那么这个例子中，待筛选属性1就是起诉日期，判别类别为等于，判断条件为2020，待筛选属性2是涉案金额，判别类别为区间，判断条件为[1000000,10000000]
             入参:input_list: list[dict] : 待筛选属性名称，判别类别和判断条件
                 input_info: list[dict]: 待筛选的原数据
             返回:筛选出的数据项
@@ -489,10 +489,10 @@ def filter_(query: str, info: str) -> str:
                             "type": "list[dict]",
                             "description": "由待筛选的属性组成的列表，每种属性分别存储一个字典内，字典的键为属性名，字典的值包含判别类别和判断条件, eg [{起诉日期: {判别类别: 等于, 判断条件: [2019]}}, {涉案金额: {判别类别: 大于, 判断条件: [10000]}}]"
                                            "判别类别一共有四种，大于，小于，等于和区间"
-                                            "判断条件是一个列表，由从query中提取出的，可以作为筛选参考值的数据组成"
+                                            "判断条件是一个列表，由从query中提取出的，可以作为筛选参考值的数据组成。注意，判断条件中应当只含有数字元素，不能包含万，亿，千等单位，你需要把类似单位转化为正确的数值"
                                             "例如，给定妙可蓝多公司的涉案信息列表，筛选出起诉日期在2020年，涉案金额大于100万小于1000万的案件"
-                                            "那么这个例子中，待筛选属性1就是起诉日期，判别类别为等于，判断条件为2020，待筛选属性2是涉案金额，判别类别为区间，判断条件为[100,1000]"
-                                            "你需要根据query，智慧地找出待筛选属性，正确地选择判别类别，并提取出全部的判断条件，最终组成input_list应有的数据结构",
+                                            "那么这个例子中，待筛选属性1就是起诉日期，判别类别为等于，判断条件为[2020]，待筛选属性2是涉案金额，判别类别为区间，判断条件为[1000000,10000000]"
+                                            "你需要从query中，智慧地找出待筛选属性，正确地选择判别类别，并提取出全部的判断条件，最终组成input_list应有的数据结构",
                         },
                         "input_info": {
                             "type": "list[dict]",
@@ -522,9 +522,42 @@ def filter_(query: str, info: str) -> str:
         model="glm-4",  # 填写需要调用的模型名称
         messages=messages,
         tools=tools,
-        tool_choice="auto",
+        tool_choice="auto"
     )
     func_name = response.choices[0].message.tool_calls[0].function.name
     response_arguments = json.loads(response.choices[0].message.tool_calls[0].function.arguments)
-    print(response_arguments)
-    return response_arguments, func_name
+    i = 0
+    while i < 10:
+        if response_arguments is None:
+            response = client.chat.completions.create(
+                model="glm-4",  # 填写需要调用的模型名称
+                messages=messages,
+                tools=tools,
+                tool_choice="auto"
+            )
+            func_name = response.choices[0].message.tool_calls[0].function.name
+            response_arguments = json.loads(response.choices[0].message.tool_calls[0].function.arguments)
+            i += 1
+            continue
+        else:
+            print(i)
+            print(response_arguments)
+            return response_arguments, func_name
+
+#
+# def filter(query: str, info: str) -> str:
+#     i = 0
+#     while i < 10:
+#         func_name = response.choices[0].message.tool_calls[0].function.name
+#         response_arguments = json.loads(response.choices[0].message.tool_calls[0].function.arguments)
+#         if response[0] is None:
+#             i += 1
+#             continue
+#         else:
+#             print(i)
+#             return response
+
+
+if __name__ == '__main__':
+
+    print(filter_(query="这些案件中，起诉时间发生在2048年且涉案金额小于100万的有哪些？", info=" "))
