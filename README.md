@@ -47,4 +47,4 @@
 
 ## 贡献者
 
-Yubin Sheng, Yue Zhu, Lin Shen
+盛裕彬，祝月，申琳
